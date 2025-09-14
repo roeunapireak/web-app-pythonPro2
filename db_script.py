@@ -137,3 +137,38 @@ def get_quises():
     close_session()
     return result
 
+def get_quiz_count():
+    "' optional function '"
+    query = 'SELECT MAX(quiz_id) FROM quiz_content'
+    open_session()
+    cursor.execute(query)
+    result = cursor.fetchone()
+    close_session()
+    return result
+
+def get_random_quiz_id():
+    query = 'SELECT quiz_id FROM quiz_content'
+    open_session()
+    cursor.execute(query)
+    ids = cursor.fetchall()
+    rand_num = randint(0, len(ids) - 1)
+    rand_id = ids[rand_num][0]
+    close_session()
+    return rand_id
+
+
+def main():
+    clear_db()
+    create_db_objects()
+    add_questions()
+    add_quiz()
+    show_tables()
+    add_links()
+    show_tables()
+    # print(get_question_after(0, 3))
+    # print(get_quiz_count())
+    # print(get_random_quiz_id())
+    pass
+
+if __name__ == "__main__":
+    main()
